@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install wabridge — WhatsApp for your AI assistant</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:0 auto;padding:24px 16px;line-height:1.55;color:#1d2330;background:#f7f8fa}
+  h1{font-size:1.7em;margin:.2em 0}
+  h2{font-size:1.2em;margin-top:1.8em}
+  .card{background:#fff;border:1px solid #e1e4ea;border-radius:12px;padding:18px;margin:16px 0}
+  pre{background:#11161f;color:#e8edf5;padding:14px;border-radius:8px;white-space:pre-wrap;word-break:break-word;font-size:.9em;margin:0}
+  .box{position:relative}
+  button{margin-top:10px;background:#1f7a4d;color:#fff;border:0;border-radius:8px;padding:10px 16px;font-size:1em;cursor:pointer}
+  button:active{background:#17603c}
+  .note{color:#5a6270;font-size:.92em}
+</style>
+</head>
+<body>
+<h1>wabridge</h1>
+<p><strong>WhatsApp for your AI assistant.</strong> It lets your assistant read your WhatsApp messages and draft replies for you. It only reads and drafts — it never sends anything on its own.</p>
+
+<div class="card">
+<h2>A. Easiest — let your AI assistant do it</h2>
+<p>Copy this message and paste it to your AI assistant:</p>
+<div class="box"><pre id="prompt">Please install wabridge for me on this computer. Fetch and run the installer:
+
+curl -fsSL https://gist.githubusercontent.com/valstoneengineering/7dadd04022357514f2b80ec98d6fe798/raw/install.sh | sh
+
+(if curl is missing, use: wget -qO- https://gist.githubusercontent.com/valstoneengineering/7dadd04022357514f2b80ec98d6fe798/raw/install.sh | sh)
+
+Then run `wabridge setup` and follow what it says. Register the MCP server named "whatsapp" with the command `wabridge mcp`. When it's time to link WhatsApp, ask me for my WhatsApp number and show me the 8-character pairing code (or the QR code) so I can link it on my phone under WhatsApp → Settings → Linked devices → Link a device. Never send WhatsApp messages without my explicit OK.</pre>
+<button data-copy="prompt">Copy message</button></div>
+</div>
+
+<div class="card">
+<h2>B. Or do it yourself in a terminal</h2>
+<p>Open a terminal and paste this one line:</p>
+<div class="box"><pre id="cmd">curl -fsSL https://gist.githubusercontent.com/valstoneengineering/7dadd04022357514f2b80ec98d6fe798/raw/install.sh | sh</pre>
+<button data-copy="cmd">Copy command</button></div>
+<p>Then run <code>wabridge setup</code> and follow the steps.</p>
+<p class="note">Needs a Debian or Ubuntu computer (64-bit Intel/AMD, "amd64") where you can use <code>sudo</code>.</p>
+</div>
+
+<p class="note"><strong>Requirements &amp; caveats:</strong> Debian/Ubuntu amd64 with sudo and internet access; a phone with WhatsApp to link it (it appears as a linked device you can remove at any time); the computer should stay on for messages to keep arriving. Read + draft only — nothing is sent without you.</p>
+
+<script>
+document.querySelectorAll('button[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.getAttribute('data-copy')).innerText, l=b.textContent;
+    function done(){b.textContent='Copied ✓';setTimeout(function(){b.textContent=l},1800)}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,fallback)}else{fallback()}
+    function fallback(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){b.textContent='Select and copy manually'}document.body.removeChild(a)}
+  });
+});
+</script>
+</body>
+</html>
